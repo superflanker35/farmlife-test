@@ -31,7 +31,5 @@ class FarmLife extends Command
     	$arr = ['Cow'=>10,'Hen'=>20];
 
     	$farm->addAnimalsToBarn($arr);
-
-    	$farm->getBarnAnimalsStats();
     }
 }
