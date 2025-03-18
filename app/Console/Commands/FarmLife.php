@@ -28,8 +28,11 @@ class FarmLife extends Command
     {
     	$farm = Farm::getInstance();
 
-    	$arr = ['Cow'=>10,'Hen'=>20];
+    	echo print_r($farm->getBarnAnimalsStats());
 
-    	$farm->addAnimalsToBarn($arr);
+	    $newAnimals = ['Hen'=>5, 'Cow'=>1];
+    	$farm->addAnimalsToBarn($newAnimals);
+
+    	echo print_r($farm->getBarnAnimalsStats());
     }
 }

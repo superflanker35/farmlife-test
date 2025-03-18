@@ -6,6 +6,7 @@ class Farm
 {
 	private static $instance;
 	private $barn;
+	private $initialAnimals = ['Cow'=>10,'Hen'=>20];
 
 	private function __construct()
 	{
@@ -15,6 +16,7 @@ class Farm
 	private function init()
 	{
 		$this->barn = new Barn();
+		$this->addAnimalsToBarn($this->initialAnimals);
 	}
 
 	/**
@@ -29,6 +31,9 @@ class Farm
 		return self::$instance;
 	}
 
+	/**
+	 * @param $animalsArray
+	 */
 	public function addAnimalsToBarn($animalsArray)
 	{
 		foreach($animalsArray as $key=>$value) {
@@ -51,9 +56,31 @@ class Farm
 		}
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getBarn()
 	{
 		return $this->barn;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getBarnAnimalsStats()
+	{
+		$barnAnimals = $this->barn->getAnimals();
+		$result = [];
+
+		foreach($barnAnimals as $value) {
+			if(!array_key_exists($value->getType(),$result)){
+				$result[$value->getType()] = 1;
+			}else{
+				$result[$value->getType()]++;
+			}
+		}
+
+		return $result;
 	}
 
 }
