@@ -8,7 +8,7 @@ abstract class Animal
 	private int $maxCollected;
 	private int $regNumber;
 
-	private $type;
+	private string $type;
 	private string $productType;
 	private string $productUnitOfMeasurement;
 

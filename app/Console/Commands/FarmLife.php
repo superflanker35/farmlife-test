@@ -29,10 +29,12 @@ class FarmLife extends Command
     	$farm = Farm::getInstance();
 
     	echo print_r($farm->getBarnAnimalsStats());
+    	echo print_r($farm->collectFromBarnAnimals());
 
 	    $newAnimals = ['Hen'=>5, 'Cow'=>1];
     	$farm->addAnimalsToBarn($newAnimals);
 
     	echo print_r($farm->getBarnAnimalsStats());
+	    echo print_r($farm->collectFromBarnAnimals());
     }
 }

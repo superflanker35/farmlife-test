@@ -6,6 +6,9 @@ class Farm
 {
 	private static $instance;
 	private $barn;
+	private $regNumbers = [];
+	private $productCollectStats = [];
+	private $weekDays = 7;
 	private $initialAnimals = ['Cow'=>10,'Hen'=>20];
 
 	private function __construct()
@@ -49,19 +52,40 @@ class Farm
 					break;
 			}
 
+			//$str = "App\Farm\Hen";
+
 			for($i = 0; $i<$value; $i++) {
 				$animal = new $animalClass();
 				$this->barn->addAnimal($animal);
+				$this->regNumbers[] = $animal->getRegNumber();
 			}
 		}
 	}
 
 	/**
-	 * @return mixed
+	 * @return array
 	 */
-	public function getBarn()
+	public function collectFromBarnAnimals()
 	{
-		return $this->barn;
+		$barnAnimals = $this->barn->getAnimals();
+		$result = [];
+
+		for($i=0; $i<$this->weekDays; $i++) {
+			foreach ($barnAnimals as $value) {
+				$type                       = $value->getType();
+				$productTypeMeasurementUnit = $value->getProductType() . ' ' . $value->getProductUnitOfMeasurement();
+
+				if (!array_key_exists($type, $result)) {
+					$result[$type][$productTypeMeasurementUnit] = $value->collect();
+				} else {
+					$result[$type][$productTypeMeasurementUnit] += $value->collect();
+				}
+			}
+		}
+
+		$this->productCollectStats[] = $result;
+
+		return $result;
 	}
 
 	/**
@@ -73,14 +97,31 @@ class Farm
 		$result = [];
 
 		foreach($barnAnimals as $value) {
-			if(!array_key_exists($value->getType(),$result)){
-				$result[$value->getType()] = 1;
+			$type = $value->getType();
+
+			if(!array_key_exists($type,$result)){
+				$result[$type] = 1;
 			}else{
-				$result[$value->getType()]++;
+				$result[$type]++;
 			}
 		}
 
 		return $result;
 	}
 
+	/**
+	 * @return array
+	 */
+	public function getRegNumbers()
+	{
+		return $this->regNumbers;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getProductCollectStats()
+	{
+		return $this->productCollectStats;
+	}
 }
