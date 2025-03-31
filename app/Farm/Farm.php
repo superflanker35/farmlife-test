@@ -36,30 +36,26 @@ class Farm
 
 	/**
 	 * @param $animalsArray
+	 *
+	 * @return bool
 	 */
-	public function addAnimalsToBarn($animalsArray)
+	public function addAnimalsToBarn($animalsArray) : bool
 	{
 		foreach($animalsArray as $key=>$value) {
-			switch($key){
-				case "Hen":
-					$animalClass = Hen::class;
-					break;
-				case "Cow":
-					$animalClass = Cow::class;
-					break;
-				default:
-					$animalClass = "";
-					break;
+			if(empty($key)){
+				return false;
 			}
 
-			//$str = "App\Farm\Hen";
-
+			$animalClass = "App\\Farm\\" . $key;
+			
 			for($i = 0; $i<$value; $i++) {
 				$animal = new $animalClass();
 				$this->barn->addAnimal($animal);
 				$this->regNumbers[] = $animal->getRegNumber();
 			}
 		}
+
+		return true;
 	}
 
 	/**
