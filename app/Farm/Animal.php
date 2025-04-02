@@ -19,7 +19,7 @@ abstract class Animal
 	 * @param string $productType
 	 * @param string $productUnitOfMeasurement
 	 */
-	public function __construct(string $type='',string $productType='',string $productUnitOfMeasurement='')
+	public function __construct(string $type='', string $productType='', string $productUnitOfMeasurement='')
 	{
 		$this->init($type,$productType,$productUnitOfMeasurement);
 	}
@@ -46,7 +46,7 @@ abstract class Animal
 	/**
 	 * @return integer
 	 */
-	public function getRegNumber()
+	public function getRegNumber() : int
 	{
 		return $this->regNumber;
 	}
@@ -62,7 +62,7 @@ abstract class Animal
 	/**
 	 * @return string
 	 */
-	public function getType()
+	public function getType() : string
 	{
 		return $this->type;
 	}
@@ -78,7 +78,7 @@ abstract class Animal
 	/**
 	 * @return string
 	 */
-	public function getProductUnitOfMeasurement()
+	public function getProductUnitOfMeasurement() : string
 	{
 		return $this->productUnitOfMeasurement;
 	}
@@ -94,7 +94,7 @@ abstract class Animal
 	/**
 	 * @return string
 	 */
-	public function getProductType()
+	public function getProductType() : string
 	{
 		return $this->productType;
 	}
