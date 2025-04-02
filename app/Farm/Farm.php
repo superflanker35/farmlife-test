@@ -5,17 +5,22 @@ namespace App\Farm;
 class Farm
 {
 	private static $instance;
-	private $barn;
-	private $regNumbers = [];
-	private $productCollectStats = [];
-	private $weekDays = 7;
-	private $initialAnimals = ['Cow'=>10,'Hen'=>20];
-
+	private int $weekDays = 7;
+	private array $regNumbers = [];
+	private array $productCollectStats = [];
+	private array $initialAnimals = ['Cow'=>10,'Hen'=>20];
+	private Barn $barn;
+	/**
+	 * Farm constructor.
+	 */
 	private function __construct()
 	{
 		$this->init();
 	}
 
+	/**
+	 *
+	 */
 	private function init()
 	{
 		$this->barn = new Barn();
@@ -25,7 +30,7 @@ class Farm
 	/**
 	 * @return Farm
 	 */
-	public static function getInstance()
+	public static function getInstance() : Farm
 	{
 		if(!isset(self::$instance)){
 			self::$instance = new self();
@@ -91,7 +96,7 @@ class Farm
 	/**
 	 * @return array
 	 */
-	public function getBarnAnimalsStats()
+	public function getBarnAnimalsStats() : array
 	{
 		$barnAnimals = $this->barn->getAnimals();
 		$result = [];
@@ -112,7 +117,7 @@ class Farm
 	/**
 	 * @return array
 	 */
-	public function getRegNumbers()
+	public function getRegNumbers() : array
 	{
 		return $this->regNumbers;
 	}
@@ -120,7 +125,7 @@ class Farm
 	/**
 	 * @return array
 	 */
-	public function getProductCollectStats()
+	public function getProductCollectStats() : array
 	{
 		return $this->productCollectStats;
 	}
